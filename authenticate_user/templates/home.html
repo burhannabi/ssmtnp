@@ -1,0 +1,574 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %}
+<style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+  
+  /* Button used to open the chat form - fixed at the bottom of the page */
+  .open-button {
+    background-color: rgb(19, 12, 12);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 150px;
+  }
+  
+  /* The popup chat - hidden by default */
+  .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Full-width textarea */
+  .form-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    min-height: 200px;
+  }
+  
+  /* When the textarea gets focus, do something */
+  .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/send button */
+  .form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  </style>
+  <!-- hero slider -->
+  <section class="hero-section overlay bg-cover" data-background="{% static 'main/images/home/banner.jpg' %}">
+    <div class="container">
+      <div class="hero-slider">
+        <!-- slider item -->
+        <div class="hero-slider-item">
+          <div class="row">
+            <div class="col-md-8">
+              <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">Your bright future is our mission</h1>
+              <p class="text-muted mb-4" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor
+                incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
+              <a href="{% url 'contact' %}" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">Apply now</a>
+            </div>
+          </div>
+        </div>
+        <!-- slider item -->
+        <div class="hero-slider-item">
+          <div class="row">
+            <div class="col-md-8">
+              <h1 class="text-white" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".1">Your bright future is our mission</h1>
+              <p class="text-muted mb-4" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor
+                incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
+              <a href="{% url 'contact' %}" class="btn btn-primary" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".7">Apply now</a>
+            </div>
+          </div>
+        </div>
+        <!-- slider item -->
+        <div class="hero-slider-item">
+          <div class="row">
+            <div class="col-md-8">
+              <h1 class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">Your bright future is our mission</h1>
+              <p class="text-muted mb-4" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor
+                incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
+              <a href="{% url 'contact' %}" class="btn btn-primary" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="zoomIn" data-delay-in=".7">Apply now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /hero slider -->
+  
+  <!-- banner-feature -->
+  <section class="bg-gray overflow-md-hidden" data-aos="flip-left">
+    <div class="container-fluid ">
+      <div class="row no-gutters">
+        <div data-aos-delay="300"  data-aos="zoom-in" class="col-xl-4 col-lg-5 align-self-end">
+          <img class="img-fluid w-100" src="{% static 'main/images/home/banner2.jpg' %}" alt="banner-feature">
+          <div class="card-body">
+            <h5 class="card-title">Dr. Qazi Shabir Ahmad</h5>
+            <p class="card-text">Secretary(IIPA), J&K (UT) Life Member (ISTE)</p>
+          </div>
+        </div>
+        <div data-aos-delay="300" data-aos="zoom-in" class="col-xl-8 col-lg-7">
+          <div class="row feature-blocks bg-gray justify-content-between">
+            <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+              <i class="ti-book mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+              <h3 class="mb-xl-4 mb-lg-3 mb-4">Scholorship News</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad</p>
+            </div>
+            <div data-aos-delay="300" data-aos="zoom-in" class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+              <i class="ti-blackboard mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+              <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Notice Board</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad</p>
+            </div>
+            <div data-aos-delay="300"  data-aos="zoom-in" class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+              <i class="ti-agenda mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+              <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Achievements</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad</p>
+            </div>
+            <div data-aos-delay="300"  data-aos="zoom-in" class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+              <i class="ti-write mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+              <h3 class="mb-xl-4 mb-lg-3 mb-4">Admission Now</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /banner-feature -->
+
+
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md mx-1">
+        <div class="row">
+          <div class="col-9">
+            <h4>Notice</h4>
+          </div>
+          <div class="col-3">
+            <a href="{% url 'notice_view' %}">Show More</a>
+          </div>
+        </div>
+        <div class="row">
+          <table data-aos="fade-up"   class="table ">
+            <thead class="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Notice</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for  notice in notice %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ notice.description }}</td>
+                <td>
+                  {% if notice.file %}
+                    <a style="text-decoration: none; font-weight: bold;" target="_blank" href="{{notice.file.url}}">Document </a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md mx-1">
+        <div class="row">
+          <div class="col-9">
+            <h4>Event</h4>
+          </div>
+          <div class="col-3">
+            <a href="{% url 'event_view' %}">Show More</a>
+          </div>
+        </div>
+        <div class="row">
+          <table data-aos="fade-up" class="table ">
+            <thead class="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Event</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for event in events %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ event.description }}</td>
+                <td>
+                  {% if event.file %}
+                    <a style="text-decoration: none; font-weight: bold;" target="_blank" href="{{event.file.url}}">Document </a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- banner carouser  -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
+          <h4>Gallery</h4>
+        </div>
+        <div class="col-2">
+          <a href="{% url 'gallery' %}">Show More</a>
+        </div>
+      </div>
+      <div class="row">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                {% if gallery1 is not None %}
+                  {% for g1 in gallery1  %}
+                  <div class="col">
+                    <img data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" src="{{ g1.image.url }}" class="img img-thumbnail" alt="...">
+                  </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="carousel-item ">
+              <div class="row">
+                {% if gallery2 is not None %}
+                {% for g2 in gallery2 %}
+                  <div class="col">
+                    <img data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    src="{{ g2.image.url }}" class="img img-thumbnail" alt="...">
+                  </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="carousel-item ">
+              <div class="row">
+                {% if gallery3 is not None %}
+                {% for g3 in gallery3 %}
+                  <div class="col">
+                    <img data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                    src="{{ g3.image.url }}" class="img img-thumbnail" alt="...">
+                  </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>            
+          </div>
+         <a class="carousel-control-prev"  data-target="#carouselExampleControls" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+         </a>
+          <a class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Banner Carousel  -->
+
+  <!-- about us -->
+  <section class="section" id='about' data-aos="fade-up"
+  data-aos-anchor-placement="top-center">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 order-2 order-md-1">
+          <h2 class="section-title">Learn About Us</h2>
+          <p>
+            {{about}}
+          </p>
+          <a class="btn btn-primary" href="{% url 'about' %}">More</a>
+        </div>
+        <div class="col-md-6 order-1 order-md-2 mb-4 mb-md-0">
+          <img class="img-fluid w-100" src="{% static 'main/images/about/about-us.jpg' %}" alt="about image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /about us -->
+  
+  
+
+  <!-- courses -->
+  <section data-aos="fade-up" data-aos-duration="3000" id="courses" class="section-sm" style="background-image: url('https://www.baldwinpl.org/wp-content/uploads/2019/11/Book-Pages-Flapping-GIF.gif');background-repeat: no-repeat;background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex align-items-center section-title justify-content-between">
+            <h2 class="mb-0 text-nowrap mr-3">Our Course</h2>
+
+          </div>
+        </div>
+      </div>
+      <!-- course list -->
+  <div class="row justify-content-center">
+    <!-- course item -->
+    {% for course in course %}
+    <div data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000" class="col-lg-4 col-sm-6 mb-5 " onclick="courseDetails('{{course.image.url}}','{{course.course_name}}','{{ course.date }}','{{ course.id }}')">
+      <div style="opacity: 0.7;"  data-toggle="modal" data-target="#course-modal" class="card p-3 rounded rounded-0 hover-shadow">
+        <img class=" rounded-0" src="{{ course.image.url }}" alt="course thumb">
+        
+        <div class="card-body">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>{{ course.date }}</li>
+          </ul>
+          <a>
+            <h4 class="card-title">{{ course.course_name }}</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- /course list -->
+      <!-- mobile see all button -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <a href="courses.html" class="btn btn-sm btn-outline-primary d-sm-none d-inline-block">sell all</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /courses -->
+  
+  <!-- cta -->
+  <section class="section bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h6 class="text-white font-secondary mb-0">Register to Join the Advance Workshop</h6>
+          <h2 class="section-title text-white">Training In Advannce Networking</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /cta -->
+  
+  <!-- success story -->
+  <section class="section bg-cover" data-background="{% static 'main/images/backgrounds/success-story.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-4 position-relative success-video">
+          <a class="play-btn venobox" href="https://youtu.be/nA1Aqp0sPQo" data-vbtype="video">
+            <i class="ti-control-play"></i>
+          </a>
+        </div>
+        <div class="col-lg-6 col-sm-8">
+          <div class="bg-white p-5">
+            <h2 class="section-title">Success Stories</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /success story -->
+  
+  <!-- teachers -->
+  <section class="section">
+    <div class="container" id="teachers">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="section-title">Our Mentors</h2>
+        </div>
+        <!-- teacher -->
+        {% for teacher in teachers %}
+        <div data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000" class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+          <div class="card border-0 rounded-0 hover-shadow">
+            <img class="card-img-top rounded-0" src="{{ teacher.image.url }}" alt="teacher">
+            <div class="card-body">
+              <a>
+                <h4 class="card-title">{{teacher.name}}</h4>
+              </a>
+              <p>Teacher</p>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a target="_blank" class="text-color" href="{{ teacher.facebook }}"><i class="ti-facebook"></i></a></li>
+                <li class="list-inline-item"><a target="_blank" class="text-color" href="{{ teacher.twitter }}"><i class="ti-twitter-alt"></i></a></li>
+                <li class="list-inline-item"><a target="_blank" class="text-color" href="{{ teacher.gmail }}"><i class="ti-google"></i></a></li>
+                <li class="list-inline-item"><a target="_blank" class="text-color" href="{{ teacher.linkedin }}"><i class="ti-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- /teachers -->
+  <button class="open-button bg-light" onclick="openForm()" >
+    <img  width="20" src="{% static 'image/bot.png' %}"/>
+  </button>
+  <div class="chat-popup" id="myForm">
+    
+    <div id="my-form" action="#" class="form-container">
+      <h6>Bot</h6>
+      <div class="row text-left">
+        <div class="col">
+          <label style="font-size: small;">Bot:</label>
+          <span id="bot-msg"></span>
+        </div>
+      </div>
+      <div class="row text-right">
+        <div class="col">
+          <label style="font-size: small;">User:</label>
+          <span id="users-bot"></span>
+        </div>
+      </div>
+      <input type="text" id="message-bot" name="msg" class="form-control mb-2"/>
+  
+      <button id="send-button-bot" type="submit" class="btn">Send</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </div>
+  </div>
+
+
+
+  <!-- course modal -->
+  <div class="modal fade" id="course-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="course-modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row text-center">
+            <div class="col">
+              <img class="img img-thumbnail" id="course-modal-img" />
+            </div>
+          </div>
+          <div class="row mt-3 text-center">
+            <div class="col">
+              <h4 id="course-modal-title">Title</h4>
+              <span id="course-modal-date"></span>
+              <p id="course-modal-desc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end course modal  -->
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+
+    var botMessage = [
+      'Hi',
+    ]
+
+    setTimeout(e=>{
+      $('#bot-msg').html(botMessage[0])
+    },5000)
+    $('#send-button-bot').click(function(){
+        var botMsg = $('#message-bot').val()
+        $('#users-bot').html(botMsg)
+        if(botMsg.includes('hi')||botMsg.includes('Hi')||botMsg.includes('hello')||botMsg.includes('Hello')){
+          $('#bot-msg').html('How can i help you?')
+          
+        }else if(botMsg.includes('courses')||botMsg.includes('Courses')){
+          $('#bot-msg').html('<a href="/#courses">Click On this link To check courses</a> ')
+        }
+        else if(botMsg.includes('register')||botMsg.includes('Register')){
+          $('#bot-msg').html('Click on register which is present onb the header.')
+        }
+        else if(botMsg.includes('ok')||botMsg.includes('Ok')||botMsg.includes('Okay')||botMsg.includes('OK')||botMsg.includes('OKAY')||botMsg.includes('okay')||botMsg.includes('KK')||botMsg.includes('kk')){
+          $('#bot-msg').html('Anything else?')
+        }else{
+          $('#bot-msg').html('Sorry!! I could\'\n Understant ')
+        }
+
+    })
+
+
+    function courseDetails(img,name,date,id){
+      $('#course-modal-img').attr('src',img)
+      $('#course-modal-title').html(name)
+      $('#course-modal-date').html(date)
+      var data = {
+        'data':id
+      }
+      $.ajax({
+        url:"/course/description",
+        type:"get",
+        data:data,
+        success:function(e){
+          $('#course-modal-desc').html(e)
+        }
+      })
+      
+    }
+
+    
+    </script>
+{% endblock %}

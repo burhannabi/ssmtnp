@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Notice
+{% endblock %}
+
+
+{% block content %}
+  <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Notice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <td>#</td>
+                            <td>Title</td>
+                            <td>Description</td>
+                            <td>Class</td>
+                            <td>Download Notice</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for notice in notice %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ notice.title }}</td>
+                            <td>{{ notice.description }}</td>
+                            <td>{{ notice.course }}</td>
+                            <td>
+                                {% if notice.file %}
+                                    <a href="{{ notice.file.url }} " download>Document</a>
+                                {% else %}
+                                    No Document
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+{% endblock %}

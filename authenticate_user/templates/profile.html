@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'profile' %}">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Dashboard</li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /page title -->
+
+
+
+  <!-- Download Pdf Button -->
+  <section class="section bg-gray">
+    <div class="container">
+      <div class="row text-right">
+        <div class="col">
+          <a class="btn btn-secondary btn-sm" href="{% url 'profile-preview' %}">
+            Save As PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Download Pdf Button End -->
+
+
+
+  <div id="download-pdf">
+  <!-- hero slider -->
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+              <h2 class="section-title"><img src="{% static 'main/images/logo.png' %}" alt="logo">Personal Information</h2>
+            </div>
+          </div>
+          <form class="row" action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                {% csrf_token %}
+                {% if user.profile_pic %}
+                    <img class="img-thumbnail mb-4" id="image" width="200px"  height="100px" src="{{ user.profile_pic.url }}" />
+                    <input type="file" name="profile_pic" accept="image/*"  id="add_profile" hidden />
+                {% else %}
+                    <img class="img-thumbnail mb-4" id="image"  src="https://static.thenounproject.com/png/363633-200.png"  />
+                    <input type="file" name="profile_pic" accept="image/*" id="add_profile"  hidden />
+                {% endif %}
+                <input type="number" class="form-control mb-3" id="phone" name="phone" placeholder="Phone" value="{{ user.phone_number }}" required>
+                <input type="text" class="form-control mb-3" id="first_name" name="city" placeholder="City" value="{{ user.address.city }}" required>
+                <input type="text" class="form-control mb-3" id="city" name="zip" placeholder="Zip" value="{{ user.address.zip }}" required>
+            </div>
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                <input type="text" class="form-control mb-3" id="username" name="username" placeholder="Your Name" disabled value="{{ user.username }}" required>
+                <input type="email" class="form-control mb-3" id="mail" name="email" placeholder="Your Email" value="{{ user.email }}" required>
+                <input type="text" class="form-control mb-3" id="first_name" name="first_name" placeholder="First Name" value="{{ user.first_name }}" required>
+                <input type="text" class="form-control mb-3" id="last_name" name="last_name" placeholder="Last Name" value="{{ user.last_name }}" required>
+                <input type="text" class="form-control mb-3" id="address" name="address" placeholder="Address" value="{{ user.address }}" required>
+                <input type="text" class="form-control mb-3" id="state" name="state" placeholder="State" value="{{ user.address.state }}" required>
+            </div>
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                <button type="submit" value="send" class="btn  btn-primary">SAVE</button>
+            </div>
+        </form>
+    </div>
+  </section>
+
+
+  
+  <!-- Qualification -->
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11">
+              <h2 class="section-title">Qualification</h2>
+            </div>
+            <div class="col-lg-1">
+              <button data-toggle="modal" data-target="#qualificationModel" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+                <table class="table" id='mytable'>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Course Type</th>
+                            <th>Course Name</th>
+                            <th>Grade</th>
+                            <th>Session</th>
+                            <th>Institute</th>
+                            <th>University</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for qual in user.user_qulification.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ qual.course_type }}</td>
+                            <td>{{ qual.course_name }}</td>
+                            <td>{{ qual.grades }}</td>
+                            <td>{{ qual.session }}</td>
+                            <td>{{ qual.institute }}</td>
+                            <td>{{ qual.university_name }}</td>
+                            <td>
+                                <a href="{% url 'qualification-del' qual.id %}" class="btn btn-info btn-sm"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+  </section>
+  </div>
+  <!-- Resume -->
+  <section class="section bg-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-11">
+          <h2 class="section-title">Resume</h2>
+        </div>
+        <div class="col-sm-1">
+          <button data-toggle="modal" data-target="#resumeModel" class="btn btn-primary">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Resume</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for resume in user.resume.all %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                  <a target="_blank" href="{{ resume.resume.url }}">{{ resume.resume }}</a>
+                </td>
+                <td>
+                  <a href="{% url 'del-resume' resume.id %}" class="btn btn-danger btn-sm"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#image').click(function(){
+        $('#add_profile').trigger('click')
+      })
+    })
+
+  </script>
+  <script>
+    $('#download').click(function(){
+      const pdf = document.getElementById('download-pdf')
+      console.log('{{user}}')
+      var opt = {
+        margin:1,
+        filename:'{{ user }}.pdf',
+        image: { type:'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait'}
+      }
+      console.log(opt)
+      html2pdf().from(pdf).set(opt).save()
+    })
+  </script>
+
+{% endblock %}
+

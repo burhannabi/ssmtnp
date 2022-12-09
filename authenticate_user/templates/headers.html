@@ -1,0 +1,179 @@
+{% load static %}
+<!-- header -->
+<header class="fixed-top header">
+    <!-- top header -->
+    <div class="top-header py-2 bg-white">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-6 text-center text-lg-left">
+            <p class="font-weight-bold">Approved by AICTE, Affiliated with University of Kashmir</p>
+          </div>
+          <div class="col-lg-4 text-center text-lg-right">
+            <ul class="list-inline">
+              {% if not user.is_authenticated %}
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block font-weight-bold" href="{% url 'login_user' %}" >login</a></li>
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block font-weight-bold" href="#signupModal" data-toggle="modal" data-target="#signupModal">register</a></li>
+              {% else %}
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block font-weight-bold" href="{% url 'logout_user' %}">Logout</a></li>
+              <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block font-weight-bold" href="{% url 'dashboard' %}" >dashboard</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- navbar -->
+    <div class="navigation w-100">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark p-0">
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'main/images/logo.png' %}" alt="logo"></a>
+          <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto text-center">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item @@about">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item @@courses">
+                <a class="nav-link" href="#courses">COURSES</a>
+              </li>
+              <li class="nav-item @@contact">
+                <a class="nav-link" href="{% url 'contact' %}">CONTACT</a>
+              </li>
+              <li class="nav-item @@contact">
+                <a class="nav-link" href="#">Career</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- /header -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Register</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form action="{% url 'register' %}" method="POST" class="row">
+                        {% csrf_token %}
+                        <div class="col-12">
+                          <input type="text" class="form-control  mb-3" id="signupPhone" name="roll" placeholder="Roll Number">
+                        </div>
+                        <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="signupName" name="first_name" placeholder="First Name">
+                        </div>
+                        <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="signupName" name="last_name" placeholder="Last Name">
+                        </div>
+                        <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="signupPhone" name="phone" placeholder="Phone">
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control mb-3" id="signupEmail" name="email" placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <input type="password" class="form-control mb-3" id="signupPassword" name="password" placeholder="Password">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">SIGN UP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="qualificationModel" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content rounded-0 border-0 p-4">
+          <div class="modal-header border-0">
+              <h3>Qualification</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="login">
+                  <form action="{% url 'qualification' %}" method="POST" class="row">
+                      {% csrf_token %}
+                      <div class="col-12">
+                        <select class="form-control  mb-3" id="signupPhone" name="course_type">
+                          <option hidden selected default>Select Course Type</option>
+                          <option value="10">10<sup>th</sup></option>
+                          <option value="12">12<sup>th</sup></option>
+                          <option value="GRADUATE">GRADUATE</option>
+                          <option value="POST-GRADUATE">POST-GRADUATE</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <input type="text" class="form-control  mb-3" id="signupPhone" name="course" placeholder="Course Name">
+                      </div>
+                      <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="signupName" name="grade" placeholder="Grade">
+                      </div>
+                      <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="signupName" name="session" placeholder="Session">
+                      </div>
+                      <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="signupPhone" name="institute" placeholder="Institute">
+                      </div>
+                      <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="signupEmail" name="university" placeholder="University">
+                      </div>
+                      <div class="col-12">
+                          <button type="submit" class="btn btn-primary">SAVE</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="resumeModel" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content rounded-0 border-0 p-4">
+          <div class="modal-header border-0">
+              <h3>Qualification</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="login">
+                  <form action="{% url 'add-resume' %}" method="POST" class="row" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="col-12">
+                        <input required type="file" class="form-control  mb-3"  name="resume" placeholder="Course Name">
+                      </div>
+                      <div class="col-12">
+                          <button type="submit" class="btn btn-primary">SAVE</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

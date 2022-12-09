@@ -1,0 +1,150 @@
+{% load static %}
+<!doctype Resumetml>
+<html lang="en">
+  <head>
+    <title>Resume</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <div class="row text-left">
+                    <div class="col">
+                        <button id="download" class="btn btn-outline-primary">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row text-right">
+                    <div class="col">
+                        <a class="font-weight-bold text-decoration-none btn btn-outline-dark btn-sm" href="{% url 'dashboard' %}">Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-3" id="download-pdf">
+        <div class="row text-center">
+            <div class="col-4">
+                <img width="250px" src="{% static 'main/images/logo.png' %}" />
+            </div>
+            <div class="col-8">
+                <h2 class="font-weight-bold">SSM COLLEGE OF ENGINEERING</h2>
+                <h4>DIVER PARIHASPORA PATTAN, KASHMIR (PIN 193121)</h4>
+                <h6>(Approved & Recognized by AICTE New Delhi & Govt. of J&K)</h6>
+                <h6>Affiliated to the University of Kashmir</h6>
+                <h6>IOS 9001: 2015 Certified</h6>
+            </div>
+        </div>
+        <hr style="height:4px;border-width:0;color:gray;background-color:gray">
+
+        <div class="row">
+            <div class="col">
+                <h5>Personal Details</h5>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-4">
+                {% if user.profile_pic %}
+                    <img class="img-thumbnail mb-4" id="image" width="200px"  height="100px" src="{{ user.profile_pic.url }}" />
+                    
+                {% else %}
+                    <img class="img-thumbnail mb-4" id="image"  src="https://static.thenounproject.com/png/363633-200.png"  />
+                    
+                {% endif %}
+            </div>
+            <div class="col-8">
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ user.first_name }} {{ user.last_name}}</td>
+                    <tr> 
+                        <th>Email:</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone:</th>
+                        <td>{{ user.phone_number}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{ user.address }}, {{ user.address.city }}, {{ user.address.state }}-{{ user.address.zip }}</td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <h5>Qualification</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table" id='mytable'>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Course Type</th>
+                            <th>Course Name</th>
+                            <th>Grade</th>
+                            <th>Session</th>
+                            <th>Institute</th>
+                            <th>University</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for qual in user.user_qulification.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ qual.course_type }}</td>
+                            <td>{{ qual.course_name }}</td>
+                            <td>{{ qual.grades }}</td>
+                            <td>{{ qual.session }}</td>
+                            <td>{{ qual.institute }}</td>
+                            <td>{{ qual.university_name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        <hr style="height:4px;border-width:0;color:gray;background-color:gray">
+        <div class="row text-center">
+            <div class="col">
+                <h5 class="font-weight-bold">Voice: (0194) 2496135, 2496260, 9906413186, 9697994705</h5>
+                <p class="font-weight-bold">Website: www.ssmengg.edu.in Email: ssmkashmir@gmail.com / ssmengg@ssmlive.com</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $('#download').click(function(){
+            alert('Alert')
+          const pdf = document.getElementById('download-pdf')
+          var opt = {
+            margin:1,
+            filename:'{{ user }}.pdf',
+            image: { type:'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait'}
+          }
+          console.log(opt)
+          html2pdf().from(pdf).set(opt).save()
+        })
+    </script>
+</body>
+</html>

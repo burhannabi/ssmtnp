@@ -1,0 +1,9 @@
+channels
+channels-redis
+django-admin-interface
+django-ckeditor
+django-import-export
+django-jazzmin
+Pillow
+python-dotenv
+pywhatkit

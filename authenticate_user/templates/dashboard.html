@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+
+{% block content %}
+  <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="section-title">Personal Information</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Profile</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://cdn-icons-png.flaticon.com/128/3237/3237472.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'profile' %}" class="btn mt-5 btn-primary">Click Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Jobs</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://cdn-icons-png.flaticon.com/128/3985/3985923.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'all_jobs' %}" class="btn mt-5 btn-primary">Click Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Placement and Traning</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://cdn.iconscout.com/icon/premium/png-128-thumb/guaranteed-internship-placement-5979263-5028127.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'placement' %}" class="btn btn-primary mt-5">Click Here</a>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Applied Jobs/Traning</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://findicons.com/files/icons/1008/quiet/128/information.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'student_job' %}" class="btn btn-primary mt-5">Click Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Notice</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://cdn-icons-png.flaticon.com/128/7757/7757460.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'notice' %}" class="btn btn-primary mt-5">Click Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 mt-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row text-center">
+                  <h5 class="col text-danger">Events</h5>
+                  <hr />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <img src = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/128/calendar-icon.png' />
+                  </div>
+                  <div class="col">
+                    <a href="{% url 'event_view' %}" class="btn btn-primary mt-5">Click Here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+
+{% endblock %}

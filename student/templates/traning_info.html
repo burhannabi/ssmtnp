@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    All Jobs
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb mb-2">
+                        <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Dashboard</li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Placement and Traning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <h3>{{ train }}</h3>
+            </div>
+            <div class="row my-3">
+                <span style="font-weight: bold;">Start &nbsp;</span><i class="fa fa-calendar-o mr-5" aria-hidden="true"> {{ train.start_date | date}}</i>
+                <span style="font-weight: bold;">End &nbsp;</span><i class="fa fa-calendar-o" aria-hidden="true"> {{ train.end_date | date}}</i>
+            </div>
+            <div class="row">
+                <h5>{{ train.traning.category }}</h5>
+            </div>
+            <div class="row">
+                <img src="{{train.traning.course_image.url}}" class="img-thumbnail" width="200px"  height="200px"/>
+            </div>
+            <div class="row mt-3">
+                <p style="font-weight: bold;">{{ train.traning.description }}</p>
+            </div>
+            <div class="row">
+                <form action="{% url 'placement' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" value="{{train.id}}" hidden name="train-id" />
+                    <button class="btn btn-primary">Apply</button>
+                </form>
+            </div>
+        </div>
+    </section>
+<!-- /page title -->
+
+
+
+{% endblock %}

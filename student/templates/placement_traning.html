@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    All Jobs
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb mb-2">
+                        <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Dashboard</li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Placement and Traning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+  <!-- /page title -->
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row">
+            <h4>Search</h4>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md">
+                <select id="title" class="form-control">
+                    <option  selected default hidden >Select Title</option>
+                    {% for cat in cat %}
+                        <option value="{{ cat.traning__title }}">{{ cat.traning__title }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+            <div class="col-md">
+                <select id="category" class="form-control">
+                    <option selected default hidden>Select Category</option>
+                    {% for cat in cat %}
+                        <option value="{{ cat.traning__category__name }}">{{ cat.traning__category__name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+            <div class="col-md">
+                <select id="course" class="form-control">
+                    <option  selected default hidden>Select Course</option>
+                    {% for cat in cat %}
+                        <option value="{{ cat.traning__course }}">{{ cat.traning__course }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+        </div>
+        <div class="row">
+            <h4>Traning</h4>
+        </div>
+        <div class="row">
+            <table class="table" id="myTable">
+                <thead class="table-dark">
+                    <tr>
+                        <td>#</td>
+                        <td>Title</td>
+                        <td>Image</td>
+                        <td>Category</td>
+                        <td>Course</td>
+                        <td>Description</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for traning in traning %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ traning.traning__title }}</td>
+                        <td>
+                            <img onclick="window.location.href='media/{{ traning.traning__course_image }}'"  style="border-radius: 50%;" src="media/{{ traning.traning__course_image }}" width="25px" height="25px" />
+                        </td>
+                        <td>{{ traning.traning__category__name }}</td>
+                        <td>{{ traning.traning__course }}</td>
+                        <td>{{ traning.traning__description }}</td>
+                        <td>
+                            <a href="{% url 'placement_info' traning.traning__id %}" class="btn btn-sm btn-success">Apply</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- /page title -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+       
+        $('#myTable').DataTable();
+    } );
+
+
+    $('#title').change(function(e){
+   
+        var search = $(this).val();
+
+        // Hide all table tbody rows
+        $('table tbody tr').hide();
+
+        // Count total search result
+        var len = $('table tbody tr:not(.notfound) td:nth-child(2):contains("'+search+'")').length;
+
+        if(len > 0){
+            // Searching text in columns and show match row
+            $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+                $(this).closest('tr').show();
+            });
+        }else{
+            $('.notfound').show();
+        }
+
+    })
+    $('#category').change(function(e){
+   
+        var search = $(this).val();
+
+        // Hide all table tbody rows
+        $('table tbody tr').hide();
+
+        // Count total search result
+        var len = $('table tbody tr:not(.notfound) td:nth-child(4):contains("'+search+'")').length;
+
+        if(len > 0){
+            // Searching text in columns and show match row
+            $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+                $(this).closest('tr').show();
+            });
+        }else{
+            $('.notfound').show();
+        }
+
+    })
+    $('#course').change(function(e){
+   
+   var search = $(this).val();
+
+   // Hide all table tbody rows
+   $('table tbody tr').hide();
+
+   // Count total search result
+   var len = $('table tbody tr:not(.notfound) td:nth-child(5):contains("'+search+'")').length;
+
+   if(len > 0){
+       // Searching text in columns and show match row
+       $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+           $(this).closest('tr').show();
+       });
+   }else{
+       $('.notfound').show();
+   }
+
+})
+</script>
+{% endblock %}

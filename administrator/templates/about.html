@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+
+{% block content %}
+  <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">About</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h2>About Us</h2>
+                <p>
+                    {{about}}
+                </p>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col">
+                <h2>Our Staff</h2>
+            </div>
+        </div>
+        <div class="row ">
+            {% for staff in staff %}
+            <div class="col-md-4 my-2">
+                <div class="card">
+                    <img src="{{ staff.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{staff.name}}</h5>
+                        <p>
+                            <a href="{{ staff.facebook }}"><i class="fa fa-facebook mx-2" aria-hidden="true"></i></a>
+                            <a href="{{ staff.twitter }}"><i class="fa fa-twitter mx-2" aria-hidden="true"></i></a>
+                            <a href="{{ staff.linkedin }}"><i class="fa fa-linkedin mx-2" aria-hidden="true"></i></a>
+                        </p>
+                        <p class="card-text">
+                            {{ staff.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  </section>
+
+
+{% endblock %}

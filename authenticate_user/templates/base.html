@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+	================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+  {% include 'css.html' %}
+  
+  {% block style %}
+  {% endblock %}
+</head>
+
+<body>
+  <!-- preloader start -->
+  <div class="preloader">
+    <img src="{% static 'main/images/preloader.gif' %}" alt="preloader">
+  </div>
+  <!-- preloader end -->
+  {% include 'headers.html' %}
+
+
+  {% block content %}
+  {% endblock %}
+
+
+
+  {% include 'footer.html' %}
+  {% include 'js.html' %}
+  {% block js %}
+  
+  {% endblock %}
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>

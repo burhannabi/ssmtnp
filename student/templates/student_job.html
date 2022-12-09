@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Applied Jobs
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <section class="page-title-section overlay" data-background="{% static 'main/images/backgrounds/page-title.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb mb-2">
+                        <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'home' %}">Home</a></li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Dashboard</li>
+                        <li class="list-inline-item text-white h3 font-secondary nasted">Applied Job/Traning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <h3>Applied Jobs</h3>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Interview Date</th>
+                            <th>Interview Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for job in user.user_jobs.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ job.job.title}}</td>
+                            <td>
+                                {{ job.job.description }}
+                            </td>
+                            <td>{{ job.date}}</td>
+                            <td>{{ job.interview_start_time}} -  {{ job.interview_end_time}} </td>
+                            <td>
+                                {{ job.application_status }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <h3>Applied Traning</h3>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Image</th>
+                            <th>Zoom URL</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for job in user.user_traning.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ job.traning.title}}</td>
+                            <td>
+                                <img style="border-radius: 50%;" width="25px" height="25px" src="{{ job.traning.course_image.url }}"
+                            </td>
+                            <td>{{ job.traning.zoom_url}}</td>
+                            <td>{{ job.traning.category}}</td>
+                            <td>
+                                {{ job.traning.description }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+  <!-- /page title -->
+
+
+
+{% endblock %}
