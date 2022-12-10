@@ -34,7 +34,7 @@ class Job(models.Model):
         for user in user:
             lt.append(user['email'])
 
-        send_mail("Job Posted","New Job has posted check out now.",settings.EMAIL_HOST_USER,lt)
+        send_mail("New Job Available","New Job Has Been Posted \nCheck Out Now.\n[SSM College Training & Placement]\nParihaspora,Pattan",settings.EMAIL_HOST_USER,lt)
         self.slug = slugify(self.title)
         super(Job, self).save(*args,**kwargs)
 
@@ -108,7 +108,7 @@ class TraningApplication(models.Model):
         for user in user:
             lt.append(user['email'])
 
-        send_mail("Traning","New Traning has posted check out now.",settings.EMAIL_HOST_USER,lt)
+        send_mail("New Training Available","New Training Has Been Posted \nCheck Out Now.\n[SSM College Training & Placement]\nParihaspora,Pattan",settings.EMAIL_HOST_USER,lt)
         super(TraningApplication, self).save(*args,**kwargs)
 
     class Meta:

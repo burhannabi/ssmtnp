@@ -9,8 +9,9 @@
         <div class="row">
           <div class="col-md-9 ml-auto bg-primary py-5 newsletter-block">
             <h3 class="text-white">Subscribe Now</h3>
-            <form action="#">
+            <form action="{% url 'event_view' %}" method='post'>
               <div class="input-wrapper">
+                {% csrf_token %}
                 <input type="email" class="form-control border-0" id="newsletter" name="newsletter" placeholder="Enter Your Email...">
                 <button type="submit" value="send" class="btn btn-primary">Join</button>
               </div>
@@ -27,13 +28,13 @@
           <a class="logo-footer" href="index.html"><img class="img-fluid mb-4" src="{% static 'main/images/logo.png' %}" alt="logo"></a>
           <div class="row">
             <div class="col">
-              <i class="fa fa-facebook text-white" style="font-size: 50px;" aria-hidden="true"></i>
+              <a href='#'><i  class="fa fa-facebook text-white" style="font-size: 50px;" aria-hidden="true"></i></a>
             </div>
             <div class="col"> 
-              <i class="fa fa-instagram text-white" style="font-size: 50px;" aria-hidden="true"></i>
+              <a href='#'><i class="fa fa-instagram text-white" style="font-size: 50px;" aria-hidden="true"></i></a>
             </div>
             <div class="col">
-              <i class="fa fa-youtube text-white " style="font-size: 50px;" aria-hidden="true"></i>
+              <a href='#'><i class="fa fa-youtube text-white " style="font-size: 50px;" aria-hidden="true"></i></a>
             </div>
             <div class="col"></div>
             <div class="col"></div>
@@ -55,6 +56,7 @@
             </li>
             <li class="my-2">
               <i class="fa fa-map-pin" aria-hidden="true"> &nbsp;Parihaspora, Pattan, Baramulla, JK</i>
+              <li> <a href="https://www.ssmengg.edu.in">College Portal</a></li>
             </li>
           </ul>
         </div>
@@ -66,6 +68,7 @@
             <li class="mb-3"><a class="text-color" href="/#about">About Us</a></li>
             <li class="mb-3"><a class="text-color" href="/#teachers">Our Teacher</a></li>
             <li class="mb-3"><a class="text-color" href="/contact">Contact</a></li>
+            
           </ul>
         </div>
       </div>

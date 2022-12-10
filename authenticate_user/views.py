@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from student.models import *
 from administrator.models import *
 
+
 class LoginUser(View):
     template_name = 'login.html'
 
@@ -200,3 +201,9 @@ class EventView(View):
             'event':Event.objects.all()
         }
         return render(request,'event.html',context)
+
+    def post(self,request):
+        Subscriber.objects.create(
+            subscribe=request.POST.get('newsletter')
+        )
+        return redirect('home')
